@@ -2,17 +2,10 @@
 #define MONTY_H
 
 /* Libraries */
-#include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <stdarg.h>
-#include <unistd.h>
-#include <ctype.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#define VALID 1
+#include <stdlib.h>
+
 
 /* provided data structures */
 
@@ -29,7 +22,7 @@ typedef struct stack_s
 {
 	int n;
 	struct stack_s *prev;
-	Struct stack_s *next;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -47,12 +40,20 @@ typedef struct instruction_s
 } instruction_t;
 
 /* function prototypes */
-void mon_push(stack_t **stack, unsigned int line_number);
-void mon_pop(stack_t **stack, unsigned int line_number);
-void mon_pall(stack_t **stack, unsigned int line_number);
-void mon_pint(stack_t **stack, unsigned int line_number);
-void mon_swap(stack_t **stack, unsigned int line_number);
-void mon_add(stack_t **stack, unsigned int line_number);
-void mon_nop(stack_t **stack, unsigned int line_number);
+void (*get_func(stack_t **stack, int l, char *code))(stack_t **, unsigned int);
+void err(void);
+void pushOp(stack_t **stack, unsigned int line_number, char *pushNum);
+void free_stack(stack_t **stack);
+/* opcodes */
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
+
+/* --- GLOBAL VARIABLES --- */
+extern FILE *file;
 
 #endif
