@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * push - adds an element to the stack
+ * push - adds an element to a stack
  * @stack: linked list stack to push to
  * @line_number: current line number of bytecode file
  */
@@ -23,7 +23,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (*stack)
 		(*stack)->prev = newNode;
 
-	newNode->prev = Null;
+	newNode->prev = NULL;
 	newNode->next = *stack;
 	newNode->n = 0;
 	*stack = newNode;
@@ -55,7 +55,7 @@ void pop(stack_t **stack, unsigned int line_number)
 
 /**
  * pint - prints the value in the first node of a stack
- * @stack: linked list stack to print
+ * @stack: linked list stack to pint
  * @line_number: current line number of bytecode file
  */
 void pint(stack_t **stack, unsigned int line_number)
@@ -68,5 +68,5 @@ void pint(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	print("%d\n", (stack)->n);
+	printf("%d\n", (*stack)->n);
 }
